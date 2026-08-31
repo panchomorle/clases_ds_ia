@@ -1,7 +1,11 @@
 # Estado actual del TP
 
-Última actualización: sesión del 2026-08-31. Rama: `tp-agentes-movilidad`
-(no fusionada a `main`, no pusheada a ningún remoto).
+Última actualización: sesión del 2026-08-31. El PR
+[#2](https://github.com/panchomorle/clases_ds_ia/pull/2) (rama
+`tp-agentes-movilidad`) ya fue revisado, mergeado a `main` por el equipo y
+la rama remota fue borrada. Este repositorio local ya está sincronizado:
+`main` actualizado, rama local `tp-agentes-movilidad` eliminada, referencia
+remota obsoleta podada (`git remote prune origin`).
 
 ## Terminado
 
@@ -26,12 +30,11 @@
 - [ ] **Explicación línea por línea de `agentes_movilidad.py`** para el
       usuario — quedó pendiente explícitamente para una próxima
       interacción.
-- [ ] **Revisión humana** del equipo siguiendo `CONSIGNAS_DE_REVISION.md`
-      (los 8 pasos, incluyendo la sección de defensa individual).
-- [ ] Decidir si se necesita hacer `push` a algún remoto (fork del equipo,
-      classroom, etc.) — no se hizo ninguno todavía.
-- [ ] Decidir si se fusiona `tp-agentes-movilidad` a `main` o se entrega
-      directamente desde la rama.
+- [ ] **Defensa individual** (sección 8 de `CONSIGNAS_DE_REVISION.md`):
+      cada integrante debe poder explicar el TP sin mirar el código.
+- [ ] Confirmar con la cátedra el criterio de entrega final (¿alcanza con
+      que esté en `main` del fork del equipo, o hay que entregarlo por otro
+      medio, por ejemplo un classroom o un link puntual?).
 
 ## Cómo retomar
 
