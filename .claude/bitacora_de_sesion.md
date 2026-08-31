@@ -96,10 +96,31 @@ donde terminó.
     `__pycache__/` y `.pytest_cache/`, que venían apareciendo como archivos
     sin trackear en cada `git status`.
 
+18. **Push y Pull Request.** Se confirmó que el usuario tiene permiso de
+    push sobre `origin` (`panchomorle/clases_ds_ia`, un fork de
+    `rafa1485/clases_ds_ia`). Se pusheó la rama `tp-agentes-movilidad` y se
+    abrió el PR #2 contra `main` con `gh pr create`.
+
+19. **Conflicto de merge.** El PR quedó en estado `CONFLICTING`. Al
+    investigar, se encontró que un compañero de equipo (`panchomorle`) había
+    diagnosticado y corregido **el mismo bug de Windows** en
+    `simulador_movilidad.py` en paralelo, en el PR #1
+    (`fix/simulador-windows-y-escenario`), ya mergeado a `main`. Se hizo
+    `git merge origin/main` sobre la rama para exponer el conflicto real:
+    un único bloque en conflicto en `cargar_centros_zonas` (dos soluciones
+    distintas al mismo problema); `consigna_agentes_movilidad.md` se
+    fusionó solo (el compañero solo había reformateado tablas Markdown, sin
+    cambiar contenido, verificado con `git diff`). Se resolvió el conflicto
+    quedándose con la versión de `panchomorle` (`tempfile.TemporaryDirectory`)
+    por ser la que ya estaba en `main`, se sacó el `import os` que quedó sin
+    uso, se volvió a correr la suite de tests (8/8 en verde) y se
+    actualizó la documentación (`decisiones_de_diseno.md` y
+    `CONSIGNAS_DE_REVISION.md`) para reflejar la versión final del fix.
+
 ## Pendiente para una próxima sesión
 
 - Explicación línea por línea de `agentes_movilidad.py`, pedida por el
   usuario para "más adelante" (ver `estado_actual.md`).
 - Revisión humana del equipo siguiendo `CONSIGNAS_DE_REVISION.md`.
-- No se hizo `git push` a ningún remoto en ningún momento; todo el trabajo
-  quedó commiteado en la rama local `tp-agentes-movilidad`.
+- Confirmar que el PR #2 quede en estado mergeable después de pushear la
+  resolución del conflicto, y decidir quién lo aprueba/mergea.

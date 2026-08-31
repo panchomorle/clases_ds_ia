@@ -115,25 +115,38 @@ with tempfile.NamedTemporaryFile(suffix=".zip") as archivo_zip:
 En Windows, `NamedTemporaryFile` abre el archivo con acceso exclusivo;
 `urlretrieve` intenta volver a abrir esa misma ruta para escribir y falla
 con `PermissionError`. En Linux/Mac esto no ocurre (por eso probablemente
-nadie lo había visto antes en clase). Se reemplazó por:
+nadie lo había visto antes en clase). Se reemplazó originalmente por una
+versión con `tempfile.mkstemp` y limpieza manual (`os.close` / `os.remove`).
+
+Un compañero de equipo (`panchomorle`) diagnosticó y corrigió el mismo bug
+en paralelo, con un PR propio (`fix/simulador-windows-y-escenario`) que ya
+se mergeó a `main` antes que el nuestro. Su solución es equivalente pero más
+simple:
 
 ```python
-descriptor, ruta_zip = tempfile.mkstemp(suffix=".zip")
-os.close(descriptor)
-try:
-    urllib.request.urlretrieve(zonas_url, ruta_zip)
-    zonas = gpd.read_file(f"zip://{ruta_zip}!taxi_zones/taxi_zones.shp")
-finally:
-    os.remove(ruta_zip)
+with tempfile.TemporaryDirectory() as temp_dir:
+    archivo_zip = Path(temp_dir) / "taxi_zones.zip"
+    urllib.request.urlretrieve(zonas_url, str(archivo_zip))
+    zonas = gpd.read_file(
+        f"zip://{archivo_zip.as_posix()}!taxi_zones/taxi_zones.shp"
+    )
 ```
 
-Es un cambio de compatibilidad puro: mismo comportamiento en cualquier
-sistema operativo, misma fuente de datos, mismo resultado. No afecta
-ningún cálculo ni la lógica de negocio del simulador. Se decidió corregirlo
-en el archivo compartido (en vez de duplicar la función en un script propio)
-porque así el comando oficial de la consigna (`simulador_entorno_agente.py`
-con los flags documentados) sigue funcionando tal cual está descrito, sin
-necesitar un script alternativo.
+Al traer `origin/main` a esta rama (`git merge origin/main`) esto generó un
+conflicto real en `simulador_movilidad.py`, porque ambas versiones tocaban
+exactamente el mismo bloque. Se resolvió **quedándose con la versión de
+`panchomorle`** (la que ya estaba en `main`) en vez de imponer la propia, y
+se sacó el `import os` que había quedado sin uso. Motivo: es la versión que
+el resto del equipo ya construye encima; mantener la propia hubiera
+generado divergencia innecesaria sin ningún beneficio funcional (ambas
+arreglan el mismo problema de la misma forma conceptual). Los tests y el
+import del módulo se volvieron a verificar después de resolver el conflicto
+y siguen en verde.
+
+Sigue siendo, en cualquiera de las dos versiones, un cambio de
+compatibilidad puro: mismo comportamiento en cualquier sistema operativo,
+misma fuente de datos, mismo resultado. No afecta ningún cálculo ni la
+lógica de negocio del simulador.
 
 ## Limitación agregada que no está en la consigna
 
