@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import calendar
+import os
 import tempfile
 import urllib.request
 from pathlib import Path
@@ -53,11 +54,17 @@ def cargar_centros_zonas(zonas_url: str = ZONAS_URL) -> pd.DataFrame:
             "Instale las dependencias con: pip install -r requirements.txt"
         ) from exc
 
-    with tempfile.NamedTemporaryFile(suffix=".zip") as archivo_zip:
-        urllib.request.urlretrieve(zonas_url, archivo_zip.name)
-        zonas = gpd.read_file(
-            f"zip://{archivo_zip.name}!taxi_zones/taxi_zones.shp"
-        )
+    # Se usa mkstemp en lugar de NamedTemporaryFile(...) as porque en Windows
+    # el archivo queda bloqueado en modo exclusivo y urlretrieve no puede
+    # reabrirlo para escribir; con mkstemp cerramos el descriptor antes de
+    # descargar y borramos el archivo manualmente al terminar.
+    descriptor, ruta_zip = tempfile.mkstemp(suffix=".zip")
+    os.close(descriptor)
+    try:
+        urllib.request.urlretrieve(zonas_url, ruta_zip)
+        zonas = gpd.read_file(f"zip://{ruta_zip}!taxi_zones/taxi_zones.shp")
+    finally:
+        os.remove(ruta_zip)
 
     if zonas.crs is None:
         raise ValueError("Las geometrías de las zonas TLC no tienen un CRS definido")
