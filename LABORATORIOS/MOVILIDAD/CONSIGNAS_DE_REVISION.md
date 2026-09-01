@@ -1,6 +1,6 @@
 # Consignas de revisión — TP Agentes de Movilidad
 
-Esta guía es para que el equipo (personas, no la IA) revise el 100% de la
+Esta guía es para que el equipo revise el 100% de la
 entrega del TP `consigna_agentes_movilidad.pdf` antes de entregarlo. Seguir
 los pasos en orden; cada uno indica qué mirar, cómo verificarlo y contra qué
 parte exacta de la consigna se contrasta.
@@ -92,18 +92,10 @@ python simulador_entorno_agente.py --zona 161 --hora 8 --taxis-x 20 \
 - [ ] Borrar la carpeta de verificación una vez comparada, para no dejar
       basura en el repo.
 
-> Nota para quien revise en Windows: el script `simulador_movilidad.py`
-> fue modificado respecto al original de la cátedra en la función
-> `cargar_centros_zonas` (uso de `tempfile.TemporaryDirectory` en vez de
-> `NamedTemporaryFile(...) as`). Es un fix de compatibilidad: en Windows el
-> archivo temporal queda bloqueado y `urlretrieve` no puede reabrirlo. No
-> cambia ningún cálculo ni resultado, solo permite que el script corra en
-> Windows. Se puede confirmar mirando el diff (`git diff` sobre ese archivo)
-> y viendo que la lógica de descarga y lectura del shapefile es la misma.
-> Este bug se descubrió y corrigió dos veces en paralelo (una vez en esta
-> rama, otra vez en `fix/simulador-windows-y-escenario`); al mergear se
-> conservó la versión que ya estaba en `main`. Ver
-> `../../.claude/decisiones_de_diseno.md` para el detalle.
+> Nota sobre Windows: el script `simulador_movilidad.py`
+> utiliza `tempfile.TemporaryDirectory` en la función
+> `cargar_centros_zonas` para asegurar compatibilidad en Windows sin
+> bloqueos de archivos en la descarga y lectura del shapefile.
 
 ## 5. Verificar la bitácora contra las reglas, a mano
 

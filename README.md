@@ -1,31 +1,22 @@
 # Clases DS & IA
 
-Repositorio del curso, clonado desde
-[panchomorle/clases_ds_ia](https://github.com/panchomorle/clases_ds_ia).
-Contiene material de Data Science e Inteligencia Artificial.
+Repositorio de la cursada con material de Data Science e Inteligencia Artificial.
 
 ## Estructura del repositorio
 
 | Carpeta | Contenido |
 |---|---|
 | `Clases/` | Material semanal de las materias `Data_Science` e `Inteligencia_Artificial`. |
-| `LABORATORIOS/` | Laboratorios integradores del curso (ver `LABORATORIOS/Laboratorios_integradores.md` y `LABORATORIOS/Apendice_D_Proyectos_integradores.md`) y trabajos prácticos puntuales, como `LABORATORIOS/MOVILIDAD/`. |
-| `Libro/` | Material de referencia tipo libro de texto. |
+| `LABORATORIOS/` | Laboratorios integradores del curso y trabajos prácticos, incluyendo `LABORATORIOS/MOVILIDAD/`. |
+| `Libro/` | Material de referencia y capítulos de lectura. |
 
-## Trabajo en curso: TP de agentes de movilidad
+## Trabajo Práctico: Agentes reactivos para refuerzo de taxis
 
-El trabajo activo en este repositorio es el TP **"Agentes reactivos para
-refuerzo de taxis"**, ubicado en [`LABORATORIOS/MOVILIDAD/`](LABORATORIOS/MOVILIDAD/README.md).
-Ese trabajo está completo (código, tests, bitácora e informe) en la rama
-`tp-agentes-movilidad`.
+El desarrollo del trabajo práctico de movilidad se encuentra en [`LABORATORIOS/MOVILIDAD/`](LABORATORIOS/MOVILIDAD/README.md).
+Incluye la implementación de los agentes reactivos (simple y basado en modelo), suite de pruebas unitarias, generación de escenario reproducible, bitácora comparativa e informe conceptual.
 
-Para entender qué se hizo, en qué orden y por qué, ver la documentación de
-proceso en [`.claude/`](.claude/README.md) — está pensada para que cualquier
-persona (o una futura sesión de un asistente) pueda retomar el trabajo sin
-haber estado presente en la conversación original.
+## Guía rápida
 
-## Por dónde empezar
-
-1. Si querés entender el TP entregado: [`LABORATORIOS/MOVILIDAD/README.md`](LABORATORIOS/MOVILIDAD/README.md).
-2. Si querés entender el proceso, las decisiones y el estado actual: [`.claude/README.md`](.claude/README.md).
-3. Si querés revisar la entrega antes de mandarla: [`LABORATORIOS/MOVILIDAD/CONSIGNAS_DE_REVISION.md`](LABORATORIOS/MOVILIDAD/CONSIGNAS_DE_REVISION.md).
+1. **Documentación del TP y ejecución**: [`LABORATORIOS/MOVILIDAD/README.md`](LABORATORIOS/MOVILIDAD/README.md).
+2. **Guía de revisión y rúbrica**: [`LABORATORIOS/MOVILIDAD/CONSIGNAS_DE_REVISION.md`](LABORATORIOS/MOVILIDAD/CONSIGNAS_DE_REVISION.md).
+3. **Informe final**: [`LABORATORIOS/MOVILIDAD/informe.md`](LABORATORIOS/MOVILIDAD/informe.md).
